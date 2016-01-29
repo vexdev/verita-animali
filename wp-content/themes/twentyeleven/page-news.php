@@ -1,25 +1,13 @@
-<?php get_header(); ?>
+<?php
+/*
+Template Name: pagina news
+*/
+?><?php get_header(); ?>
 <div id="center">
   <?php get_sidebar(); ?>
 <div id="contenuto">
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-  <h1><?php the_title(); ?></h1>
-  <div id="music"></div>
-  <div class="entry">
-    <?php the_content('<p>leggi il seguito... &raquo;</p>'); ?>
 
-<div style="font-size:18px; color:#000">
-<?php echo get_post_meta($post->ID, 'ora', true); ?></div>
-<?php //the_meta(); ?>
-
-
-
-    <?php wp_link_pages(array('before' => '<p><strong>' . __('Pagine:', 'kubrick') . '</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
-  <?php endwhile; endif; ?>
-
-
-
-</div>  
+<? echo getPostList('news',5); ?> 
 </div>
 <div class="clearall"></div>
 </div>

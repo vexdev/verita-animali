@@ -2,8 +2,13 @@
 
 get_header(); ?>
 
-		<div id="container">
-			<div id="content" role="main">
+		
+        <div id="center">
+        <?php get_sidebar(); ?>
+        
+        <div id="contenuto">
+        <div id="container">
+			<div id="content">
 				<div class="breadcrumbs">
 					<?php the_title(); ?>
 				</div>
@@ -39,6 +44,9 @@ get_header(); ?>
 								$link					= $post_meta['_prtfl_link'];
 								$short_descr	= $post_meta['_prtfl_short_descr'];
 								$svn					= $post_meta['_prtf_svn'];
+								$prezzo			= $post_meta['_prtfl_prezzo'];
+								//$altro			= $post_meta['_prtfl_altro'];
+								
 							}
 							else{
 								$date_compl		= get_post_meta( $post->ID, '_prtfl_date_compl', true );
@@ -47,6 +55,9 @@ get_header(); ?>
 								$link					= get_post_meta($post->ID, '_prtfl_link', true);
 								$short_descr	= get_post_meta($post->ID, '_prtfl_short_descr', true); 
 								$svn					= get_post_meta($post->ID, '_prtf_svn', true);
+								$prezzo	= get_post_meta($post->ID, '_prtfl_prezzo', true);
+								//$altro	= get_post_meta($post->ID, '_prtfl_altro', true);
+								
 							} ?>
 
 
@@ -56,22 +67,33 @@ get_header(); ?>
 								</a>
 							</div>
 							<div class="portfolio_short_content">
-								<p>
-									<span class="lable"><?php _e( 'Date of completion', 'portfolio' ); ?>:</span> <?php echo $date_compl; ?>
-								</p>
-								<?php $user_id = get_current_user_id();
+								<!--<p>
+									<span class="lable"><?php //_e( 'Data di inserimento', 'portfolio' ); ?>:</span> <?php //echo $date_compl; ?>
+								</p>-->
+								
+                                <p><span class="lable"><?php _e( 'Descrizione', 'portfolio' ); ?>:</span> <?php echo str_replace("\n", "<br />", $post->post_content); ?></p>
+                          		
+                                
+                                <p><span class="lable"><?php _e( 'Prezzo', 'portfolio' ); ?>:</span> <?php echo $prezzo; ?></p>
+                                 
+                                
+                                <?php $user_id = get_current_user_id();
 								if ( $user_id == 0 ) { ?>
-								<p><span class="lable"><?php _e( 'Link', 'portfolio' ); ?>:</span> <?php echo $link; ?></p>
+								<p><span class="lable"><?php _e( 'Contatti', 'portfolio' ); ?>:</span> <?php echo $link; ?></p>
 								<?php }
 								else if( parse_url( $link ) !== false ) { ?>
-								<p><span class="lable"><?php _e( 'Link', 'portfolio' ); ?>:</span> <a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
+								<p><span class="lable"><?php _e( 'Contatti', 'portfolio' ); ?>:</span> <a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
 								<?php } else { ?>
-								<p><span class="lable"><?php _e( 'Link', 'portfolio' ); ?>:</span> <?php echo $link; ?></p>
+								<p><span class="lable"><?php _e( 'Contatti', 'portfolio' ); ?>:</span> <?php echo $link; ?></p>
 								<?php } ?>
-								<p><span class="lable"><?php _e( 'Description', 'portfolio' ); ?>:</span> <?php echo str_replace("\n", "<br />", $post->post_content); ?></p>
+                                
+                            	<!--<p><span class="lable"><?php //_e( 'Altro', 'portfolio' ); ?>:</span> <?php //echo $altro; ?></p>-->
+                                
+								
+                                
 								<?php if ( 0 != $user_id && $prtfl_options ) {
 									if( 1 == $portfolio_options['prtfl_svn_additional_field'] ) { ?>
-										<p><span class="lable"><?php _e( 'svn', 'portfolio' ); ?>:</span> <?php echo $svn; ?></p>
+										<p><span class="lable"><?php _e( 'SVN', 'portfolio' ); ?>:</span> <?php echo $svn; ?></p>
 									<?php }
 									if( 1 == $portfolio_options['prtfl_executor_additional_field'] ) {
 										$executors_profile = wp_get_object_terms( $post->ID, 'portfolio_executor_profile' ); ?>
@@ -109,7 +131,7 @@ get_header(); ?>
 									$image_desc		= $image_desc->post_content;
 									
 									if( 0 == $key ) { ?>
-										<span class="lable"><?php _e('More screenshots', 'portfolio' ); ?>:</span> 
+										<span class="lable"><?php _e('altre foto', 'portfolio' ); ?>:</span> 
 										<div class="portfolio_images_rows">
 									<?php } ?>
 										<div class="portfolio_images_gallery">
@@ -132,7 +154,7 @@ get_header(); ?>
 							<div class="read_more">&nbsp;</div>
 							<?php $terms = wp_get_object_terms( $post->ID, 'portfolio_technologies' ) ;			
 							if ( is_array( $terms ) && count( $terms ) > 0) { ?>
-								<div class="portfolio_terms"><?php _e( 'Categoria', 'portfolio' ); ?>:
+								<div class="portfolio_terms"><?php _e( 'Categorie', 'portfolio' ); ?>:
 								<?php $count = 0;
 								foreach ( $terms as $term ) {
 									if( $count > 0 ) 
@@ -141,9 +163,6 @@ get_header(); ?>
 									$count++;
 								} ?>
 								</div>
-                                
-                         
-                                
 							<?php } ?>
 						</div> <!-- .entry_footer -->
 					</div> <!-- .portfolio_content -->
@@ -158,6 +177,10 @@ get_header(); ?>
 			</div><!-- #content -->
 		</div><!-- #container -->
 		<div id="jquery-overlay"></div>
+</div>
 
-<?php get_sidebar(); ?>
+<div class="clearall"></div>
+</div>
+<div id="partners"></div>
+<div class="clearall"></div>
 <?php get_footer(); ?>

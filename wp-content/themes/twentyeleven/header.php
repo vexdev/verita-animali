@@ -1,123 +1,80 @@
-<?php
-/**
- * The Header for our theme.
- *
- * Displays all of the <head> section and everything up till <div id="main">
- *
- * @package WordPress
- * @subpackage Twenty_Eleven
- * @since Twenty Eleven 1.0
- */
-?><!DOCTYPE html>
-<!--[if IE 6]>
-<html id="ie6" <?php language_attributes(); ?>>
-<![endif]-->
-<!--[if IE 7]>
-<html id="ie7" <?php language_attributes(); ?>>
-<![endif]-->
-<!--[if IE 8]>
-<html id="ie8" <?php language_attributes(); ?>>
-<![endif]-->
-<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
-<html <?php language_attributes(); ?>>
-<!--<![endif]-->
-<head>
-<meta charset="<?php bloginfo( 'charset' ); ?>" />
-<meta name="viewport" content="width=device-width" />
-<title><?php
-	/*
-	 * Print the <title> tag based on what is being viewed.
-	 */
-	global $page, $paged;
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
+<head profile="http://gmpg.org/xfn/11">
+<meta name="robots" content="all" />
+<meta name="robots" content="index, follow" />
+<meta name="google-site-verification" content="r-MZ6XGwa7scTKROasl2cYtJfYiv57kqqavl4EC_M8w" />
 
-	wp_title( '|', true, 'right' );
+<meta name="keywords" content="articoli per animali, allevamento, allevamenti, protezione animali, mattatoio, macello, pellicce, pelliccia, adozioni cani, adozione gatti, animali  maltrattati, maltrattamento animali, animalisti italiani, maltrattamenti animali, usato animali, video maltrattamenti animali, zeudi, coscienza degli animali" />
+<meta name="description" content="Verità Animali nasce dal desiderio di far conoscere agli esseri umani le crudeltà che si celano dietro ai prodotti finiti di origine animale, puliti dal sangue da altri esseri umani, ma ancora grondanti di sofferenza e dolore, le crudeltà che gli esseri umani infliggono alle altre specie anche quando il prodotto finito è solo puro divertimento di uno stupido umano a discapito di povere creature indifese con sensibilità nettamente superiore alla nostra, in grado di provare sentimenti e sentire dolore, la verità sullo sfruttamento animale, di ogni sorta." />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 
-	// Add the blog name.
-	bloginfo( 'name' );
+<link rel="shortcut icon" href="<?php bloginfo('url'); ?>/favicon3.ico" />
+<script src="<?php bloginfo('url')?>/Scripts/packed/swfobject.js" type="text/javascript"></script>
+<script type="text/javascript">
+// impostazioni Flash
+var params = {};
+params.quality = "high";
+params.wmode = "transparent";
+params.allowscriptaccess = "always";
+params.swliveconnect = "true";
+params.menu = "false";
+params.allowNetworking = "all";
+params.allowFullScreen = "false";
 
-	// Add the blog description for the home/front page.
-	$site_description = get_bloginfo( 'description', 'display' );
-	if ( $site_description && ( is_home() || is_front_page() ) )
-		echo " | $site_description";
 
-	// Add a page number if necessary:
-	if ( $paged >= 2 || $page >= 2 )
-		echo ' | ' . sprintf( __( 'Page %s', 'twentyeleven' ), max( $paged, $page ) );
+function _onload()
+{
+	swfobject.embedSWF("<?php bloginfo('url')?>/flash/slider?v3.0.swf", "flash", "1008", "270", "9.0.0", false, false, params, false);
+	<? if(is_page('verita-animali')) { ?>	
+	swfobject.embedSWF("<?php bloginfo('url')?>/flash/audio.swf?v2.0", "music", "1", "1", "9.0.0", false, false, params, false);
+	<? } ?>
+}
 
-	?></title>
-<link rel="profile" href="http://gmpg.org/xfn/11" />
-<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
-<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<!--[if lt IE 9]>
-<script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
-<![endif]-->
-<?php
-	/* We add some JavaScript to pages with the comment form
-	 * to support sites with threaded comments (when in use).
-	 */
-	if ( is_singular() && get_option( 'thread_comments' ) )
-		wp_enqueue_script( 'comment-reply' );
+</script>
 
-	/* Always have wp_head() just before the closing </head>
-	 * tag of your theme, or you will break many plugins, which
-	 * generally use this hook to add elements to <head> such
-	 * as styles, scripts, and meta tags.
-	 */
-	wp_head();
-?>
+<SCRIPT language="javascript">
+<!-- Begin
+function non(clic) {
+var msg="Verità Animali - Tutti i Diritti Riservati";
+if (navigator.appName == 'Netscape' && clic.which==3) {
+alert(msg);
+return false;}
+else
+if (navigator.appName == 'Microsoft Internet Explorer' && event.button==2) {
+alert(msg);
+return false;
+}
+return true;
+}
+document.onmousedown = non;
+// End --> 
+</SCRIPT>
+
+<title>Verit&agrave; Animali</title>
+<link href="<?php bloginfo('url'); ?>/css/style.css" rel="stylesheet" type="text/css" />
+<?php wp_head(); ?>
 </head>
+<?php flush(); ?>
+<body onload="_onload()">
 
-<body <?php body_class(); ?>>
-<div id="page" class="hfeed">
-	<header id="branding" role="banner">
-			<hgroup>
-				<h1 id="site-title"><span><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span></h1>
-				<h2 id="site-description"><?php bloginfo( 'description' ); ?></h2>
-			</hgroup>
-
-			<?php
-				// Check to see if the header image has been removed
-				$header_image = get_header_image();
-				if ( ! empty( $header_image ) ) :
-			?>
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-				<?php
-					// The header image
-					// Check if this is a post or page, if it has a thumbnail, and if it's a big one
-					if ( is_singular() &&
-							has_post_thumbnail( $post->ID ) &&
-							( /* $src, $width, $height */ $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), array( HEADER_IMAGE_WIDTH, HEADER_IMAGE_WIDTH ) ) ) &&
-							$image[1] >= HEADER_IMAGE_WIDTH ) :
-						// Houston, we have a new header image!
-						echo get_the_post_thumbnail( $post->ID, 'post-thumbnail' );
-					else : ?>
-					<img src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH; ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="" />
-				<?php endif; // end check for featured image or standard header ?>
-			</a>
-			<?php endif; // end check for removed header image ?>
-
-			<?php
-				// Has the text been hidden?
-				if ( 'blank' == get_header_textcolor() ) :
-			?>
-				<div class="only-search<?php if ( ! empty( $header_image ) ) : ?> with-image<?php endif; ?>">
-				<?php get_search_form(); ?>
-				</div>
-			<?php
-				else :
-			?>
-				<?php get_search_form(); ?>
-			<?php endif; ?>
-
-			<nav id="access" role="navigation">
-				<h3 class="assistive-text"><?php _e( 'Main menu', 'twentyeleven' ); ?></h3>
-				<?php /*  Allow screen readers / text browsers to skip the navigation menu and get right to the good stuff. */ ?>
-				<div class="skip-link"><a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to primary content', 'twentyeleven' ); ?>"><?php _e( 'Skip to primary content', 'twentyeleven' ); ?></a></div>
-				<div class="skip-link"><a class="assistive-text" href="#secondary" title="<?php esc_attr_e( 'Skip to secondary content', 'twentyeleven' ); ?>"><?php _e( 'Skip to secondary content', 'twentyeleven' ); ?></a></div>
-				<?php /* Our navigation menu.  If one isn't filled out, wp_nav_menu falls back to wp_page_menu. The menu assiged to the primary position is the one used. If none is assigned, the menu with the lowest ID is used. */ ?>
-				<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
-			</nav><!-- #access -->
-	</header><!-- #branding -->
-
-
-	<div id="main">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/it_IT/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- HEADER -->
+<div id="top"><div id="facebook"></div>
+</div>
+<div id="testata">
+<div id="marchio"><img src="<?php bloginfo('url')?>/grafica/marchio.png" width="278" height="211" alt="Verit&agrave; Animali" /></div>
+<div id="logo"><img src="<?php bloginfo('url')?>/grafica/logo.png?=v1.20" width="576" height="211" alt="Verit&agrave; animali" /></div>
+<div class="clearall"></div>
+</div>
+<div id="menu"><a href="<?php bloginfo('url')?>">Home</a><a href="<?php bloginfo('url')?>/appuntamenti/">Appuntamenti</a><a href="<?php bloginfo('url')?>/appelli-petizioni/">Appelli e Petizioni</a><a href="<?php bloginfo('url')?>/contatti/">Contatti e Numeri Utili</a><div class="cerca"><?php include(TEMPLATEPATH.'/searchform.php'); ?></div>
+<div class="clearall"></div></div>
+<div id="flash"><div class="clearall"></div></div>

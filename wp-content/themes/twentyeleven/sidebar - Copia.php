@@ -1,8 +1,6 @@
 <div id="sidebar">
   <ul id="pagenav">
-   <?php  
-   
-   login_with_ajax(); 
+   <?php  login_with_ajax(); ?><?php
 
 	// determino il numero delle eventuali pagine padre della pagina corrente
 	$antenati = sizeof($post->ancestors);

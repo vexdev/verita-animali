@@ -10,19 +10,18 @@ Template Name: Portfolio template
 
 get_header(); ?>
 
-
-
-		<div id="container">
-
-			<div id="content" role="main">
-
-				<div class="breadcrumbs">
-
-				<?php if( $wp_query->query_vars["technologies"] ) {
+<div id="center">
+  <?php get_sidebar(); ?>
+	<div id="contenuto">
+  <div id="container">
+      <div id="content">
+    
+        <h1>
+          <?php if( $wp_query->query_vars["technologies"] ) {
 
 					$term = get_term_by('slug', $wp_query->query_vars["technologies"], 'portfolio_technologies');
 
-					echo __('Technologies', 'portfolio').": ".( $term->name );
+					echo __('Categoria', 'portfolio').": ".( $term->name );
 
 				}
 
@@ -31,12 +30,9 @@ get_header(); ?>
 					the_title(); 
 
 				} ?>
-
-				</div>
-
-			
-
-				<?php global $wp_query;
+        </h1>
+     
+        <?php global $wp_query;
 
 				$paged = ( $wp_query->query_vars['paged'] ) ? $wp_query->query_vars['paged'] : 1;
 
@@ -103,12 +99,9 @@ get_header(); ?>
 				
 
 				while ( have_posts() ) : the_post(); ?>
-
-					<div class="portfolio_content">
-
-						<div class="entry">
-
-							<?php global $post;
+        <div id="portfolio_content">
+          <div class="entry">
+            <?php global $post;
 
 							$meta_values				= get_post_custom($post->ID);
 
@@ -146,101 +139,102 @@ get_header(); ?>
 
 								$post_meta		= get_post_meta( $post->ID, 'prtfl_information', true);
 
-								//$date_compl		= $post_meta['_prtfl_date_compl'];
+								$date_compl		= $post_meta['_prtfl_date_compl'];
 
-								//$date_compl		= explode( "/", $date_compl );
+								$date_compl		= explode( "/", $date_compl );
 
-								//$date_compl		= date( get_option( 'date_format' ), strtotime( $date_compl[1]."-".$date_compl[0].'-'.$date_compl[2] ) );
+								$date_compl		= date( get_option( 'date_format' ), strtotime( $date_compl[1]."-".$date_compl[0].'-'.$date_compl[2] ) );
 
 								$link					= $post_meta['_prtfl_link'];
 
 								$short_descr	= $post_meta['_prtfl_short_descr'];
+								
+								$prezzo			= $post_meta['_prtfl_prezzo'];
+								
+							//	$altro			= $post_meta['_prtfl_altro'];
+					
 
 							}
 
 							else{
 
-								//$date_compl		= get_post_meta( $post->ID, '_prtfl_date_compl', true );
+								$date_compl		= get_post_meta( $post->ID, '_prtfl_date_compl', true );
 
-								//$date_compl		= explode( "/", $date_compl );
+								$date_compl		= explode( "/", $date_compl );
 
-								//$date_compl		= date( get_option( 'date_format' ), strtotime( $date_compl[1]."-".$date_compl[0].'-'.$date_compl[2] ) );
+								$date_compl		= date( get_option( 'date_format' ), strtotime( $date_compl[1]."-".$date_compl[0].'-'.$date_compl[2] ) );
 
 								$link					= get_post_meta($post->ID, '_prtfl_link', true);
 
 								$short_descr	= get_post_meta($post->ID, '_prtfl_short_descr', true); 
+								
+								$prezzo	= get_post_meta($post->ID, '_prtfl_prezzo', true);
+								
+							//	$altro	= get_post_meta($post->ID, '_prtfl_altro', true);
+								
+								$price	= get_post_meta($post->ID, '_prtfl_price', true); 
 
 							} ?>
-
-
-
-							<div class="portfolio_thumb">
-
-								<a class="lightbox" rel="lightbox" href="<?php echo $image[0]; ?>" title="<?php echo $image_desc; ?>">
-
-									<img src="<?php echo $image[0]; ?>" width="<?php echo $image[1]; ?>" alt="<?php echo $image_alt; ?>" />
-
-								</a>
-
-							</div>
-
-							<div class="portfolio_short_content">
-
-								<div class="item_title">
-
-									<p>
-
-										<a href="<?php echo get_permalink(); ?>" rel="bookmark"><?php echo get_the_title(); ?></a>
-
-									</p>
-
-								</div> <!-- .item_title -->
-
-								<p>
-
-									<!--<span class="lable"><?php //_e( 'Date of completion', 'portfolio' ); ?>:</span> <?php //echo $date_compl; ?>-->
-
-								</p>
-
-								<?php $user_id = get_current_user_id();
+            <div class="portfolio_thumb"> <a class="lightbox" href="<?php the_permalink(); ?>" title="<?php echo $image_desc; ?>"> <img src="<?php echo $image[0]; ?>" width="<?php echo $image[1]; ?>" alt="<?php echo $image_alt; ?>" /> </a> </div>
+            <div id="portfolio_short_content">
+              <div class="item_title">
+                <p> <a class="titolo" href="<?php echo get_permalink(); ?>" ><?php echo get_the_title(); ?></a> </p>
+              </div>
+              <!-- .item_title -->
+              
+              <!--<p> <span class="lable">
+                <?php //_e( 'Data di inserimento', 'portfolio' ); ?>
+                :</span> <?php //echo $date_compl; ?> </p>-->
+             
+              <p><span class="lable">
+                <?php _e( 'Descrizione', 'portfolio' ); ?>
+                :</span> <?php echo $short_descr; ?></p>
+               <p><span class="lable">
+                <?php _e( 'Prezzo', 'portfolio' ); ?>
+                :</span> <?php echo $prezzo; ?></p>
+                
+                
+                 <?php $user_id = get_current_user_id();
 
 								if ( $user_id == 0 ) { ?>
-
-								<p><span class="lable"><?php _e( 'Link', 'portfolio' ); ?>:</span> <?php echo $link; ?></p>
-
-								<?php }
+              <p><span class="lable">
+                <?php _e( 'Contatti', 'portfolio' ); ?>
+                :</span> <?php echo $link; ?></p>
+              <?php }
 
 								else if( parse_url( $link ) !== false ) { ?>
-
-								<p><span class="lable"><?php _e( 'Link', 'portfolio' ); ?>:</span> <a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
-
-								<?php } else { ?>
-
-								<p><span class="lable"><?php _e( 'Link', 'portfolio' ); ?>:</span> <?php echo $link; ?></p>
-
-								<?php } ?>
-
-								<p><span class="lable"><?php _e( 'Short description', 'portfolio' ); ?>:</span> <?php echo $short_descr; ?></p>
-
-							</div> <!-- .portfolio_short_content -->
-
-						</div> <!-- .entry -->
-
-						<div class="entry_footer"> 
-
-							<div class="read_more">
-
-								<a href="<?php the_permalink(); ?>" rel="bookmark"><?php _e( 'Read more', 'portfolio' ); ?></a>
-
-							</div> <!-- .read_more -->
-
-							<?php $terms = wp_get_object_terms( $post->ID, 'portfolio_technologies' ) ;			
+              <p><span class="lable">
+                <?php _e( 'Contatti', 'portfolio' ); ?>
+                :</span> <?php echo $link; ?></p>
+              <?php } else { ?>
+              <p><span class="lable">
+                <?php _e( 'Contatti', 'portfolio' ); ?>
+                :</span> <?php echo $link; ?></p>
+              <?php } ?>
+                
+                 <!--<p><span class="lable">
+                <?php //_e( 'Altro', 'portfolio' ); ?>
+                :</span> <?php //echo $altro; ?></p>-->
+            </div>
+            <!-- .portfolio_short_content --> 
+            
+          </div>
+          <!-- .entry -->
+          
+          <div class="entry_footer">
+            <div class="read_more"> <a href="<?php the_permalink(); ?>" rel="bookmark">
+              <?php _e( 'Dettagli', 'portfolio' ); ?>
+              </a> </div>
+            <!-- .read_more -->
+            
+            <?php $terms = wp_get_object_terms( $post->ID, 'portfolio_technologies' ) ;			
 
 							if ( is_array( $terms ) && count( $terms ) > 0) { ?>
-
-								<div class="portfolio_terms"><?php _e( 'Categoria', 'portfolio' ); ?>:
-
-								<?php $count = 0;
+            <div class="portfolio_terms">
+                      
+              <?php _e( 'Categoria', 'portfolio' ); ?>
+              : 
+              <?php $count = 0;
 
 								foreach ( $terms as $term ) {
 
@@ -248,27 +242,27 @@ get_header(); ?>
 
 										echo ', '; 
 
-									echo '<a href="'. get_term_link( $term->slug, 'portfolio_technologies') . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a>';
+									echo '<a href="'. get_term_link( $term->slug, 'portfolio_technologies') . '" title="' . sprintf( __( "Guarda tutti gli oggetti in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a>';
 
 									$count++;
 
 								} ?>
-
-								</div>
-
-							<?php } ?>
-
-						</div> <!-- .entry_footer -->
-
-					</div> <!-- .portfolio_content -->
-
-			<?php endwhile; 
+            </div>
+            <?php } ?>
+          </div>
+          
+          
+         
+         
+          <!-- .entry_footer --> 
+          
+        </div>
+        <!-- .portfolio_content -->
+        
+        <?php endwhile; 
 
 			$portfolio_options = get_option( 'prtfl_options' ); ?>
-
-			
-
-				<script type="text/javascript">
+        <script type="text/javascript">
 
 					var $j = jQuery.noConflict();
 
@@ -278,22 +272,28 @@ get_header(); ?>
 
 					});
 
-				</script>
-
-			</div><!-- #content -->
-
-			<div id="portfolio_pagenation">
-
-			<?php prtfl_pagination(); ?>
-
-			</div>
-
-		</div><!-- #container -->
-
-		<div id="jquery-overlay"></div>
-
-
-
-<?php get_sidebar(); ?>
-
+				</script> 
+    </div>  <div class="clearall"></div>
+ <!-- #content -->
+      <div id="portfolio_pagenation"><?php prtfl_pagination(); ?></div>
+        <div class="entry">
+		
+		<?php  
+		$my_postid = 154;//This is page id or post id
+$content_post = get_post($my_postid);
+$content = $content_post->post_content;
+$content = apply_filters('the_content', $content);
+$content = str_replace(']]>', ']]&gt;', $content);
+echo $content;
+; ?>
+        
+        </div> 
+      <div class="clearall"></div>
+    </div><!-- #container --> 
+     
+  			</div><!-- #contenuto --> 
+<div class="clearall"></div>
+	</div><!-- #center --> 
+<div id="partners"><a href="http://www.zooplus.it/shop/partner/zap143909"><img src="http://www.zooplus.it/affiliate/material/zap143909" alt="TUTTI GLI ANIMALI" width="468" height="60" border="0"/></a> <a href="http://laverabestia.org" target="_blank"><img src="http://laverabestia.org/images/banner/banneroriz.png" alt="Laverabestia.org - Animal Video Community" border="0" /></a></div>
+<div class="clearall"></div>
 <?php get_footer(); ?>

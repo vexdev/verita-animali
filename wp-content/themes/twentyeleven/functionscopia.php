@@ -700,14 +700,19 @@ function getPostList($categ='',$postnr=20){
 					
                         $htmlcod .= "<div class=\"left\">";                                	
                         $htmlcod .= "<a href='". get_permalink() ."' title='". get_the_title() ."'>";
-                    	 $htmlcod .= "</a>";
-					
-						$htmlcod .=  $imgsrc .  get_the_excerpt();  
-						
                         
+						
+					
+					
+						$htmlcod .= $imgsrc;  
+						
+                        $htmlcod .= "</a>"; 
 						$htmlcod .= "</div>";
 						
-					
+						
+						$htmlcod .= "<div class=\"right\">"; 
+						$htmlcod .= get_the_excerpt();
+						$htmlcod .= "</div>"."\n";
 						      
                   
 						

@@ -1,22 +1,18 @@
-<?php
-/**
- * The template for displaying Category Archive pages.
- *
- * @package WordPress
- * @subpackage Twenty_Eleven
- * @since Twenty Eleven 1.0
- */
+<?php get_header(); ?>
+<div id="center">
+  <?php get_sidebar(); ?>
+<div id="contenuto">
+<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+  <h1><?php the_title(); ?></h1>
+  <div id="music"></div>
+  <div class="entry">
+    <?php the_content('<p>leggi il seguito... &raquo;</p>'); ?>
 
-get_header(); ?>
+		
 
-		<section id="primary">
-			<div id="content" role="main">
-
-			<?php if ( have_posts() ) : ?>
-
-				<header class="page-header">
+				ssssssss
 					<h1 class="page-title"><?php
-						printf( __( 'Category Archives: %s', 'twentyeleven' ), '<span>' . single_cat_title( '', false ) . '</span>' );
+						printf( __( 'Category Archives: %s', 'veritaanimali2.0' ), '<span>' . single_cat_title( '', false ) . '</span>' );
 					?></h1>
 
 					<?php
@@ -24,42 +20,39 @@ get_header(); ?>
 						if ( ! empty( $category_description ) )
 							echo apply_filters( 'category_archive_meta', '<div class="category-archive-meta">' . $category_description . '</div>' );
 					?>
-				</header>
+				
 
-				<?php twentyeleven_content_nav( 'nav-above' ); ?>
 
-				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>
 
-					<?php
-						/* Include the Post-Format-specific template for the content.
-						 * If you want to overload this in a child theme then include a file
-						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-						 */
-						get_template_part( 'content', get_post_format() );
-					?>
 
-				<?php endwhile; ?>
 
-				<?php twentyeleven_content_nav( 'nav-below' ); ?>
 
-			<?php else : ?>
 
-				<article id="post-0" class="post no-results not-found">
-					<header class="entry-header">
-						<h1 class="entry-title"><?php _e( 'Nothing Found', 'twentyeleven' ); ?></h1>
-					</header><!-- .entry-header -->
+<div style="font-size:18px; color:#000">
+<?php //echo get_post_meta($post->ID, 'data', true); ?></div>
+<?php //the_meta(); ?>
 
-					<div class="entry-content">
-						<p><?php _e( 'Apologies, but no results were found for the requested archive. Perhaps searching will help find a related post.', 'twentyeleven' ); ?></p>
-						<?php get_search_form(); ?>
-					</div><!-- .entry-content -->
-				</article><!-- #post-0 -->
 
-			<?php endif; ?>
 
-			</div><!-- #content -->
-		</section><!-- #primary -->
+    <?php wp_link_pages(array('before' => '<p><strong>' . __('Pagine:', 'kubrick') . '</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
+  <?php endwhile; endif; ?>
 
-<?php get_sidebar(); ?>
+
+
+</div>  
+</div>
+<div class="clearall"></div>
+</div>
+<div id="partners">
+<!-- Begin zooplus Partner Program Code -->
+<a href="http://www.zooplus.it/shop/partner/zap143909"><img src="http://www.zooplus.it/affiliate/material/zap143909" alt="TUTTI GLI ANIMALI" width="468" height="60" border="0"/></a>
+<!-- End zooplus Partner Program Code -->
+
+<a href="http://laverabestia.org" target="_blank"><img src="http://laverabestia.org/images/banner/banneroriz.png" alt="Laverabestia.org - Animal Video Community" width="468" height="60" border="0" /></a></div>
+<div class="clearall"></div>
+
+
+
+
+
 <?php get_footer(); ?>
