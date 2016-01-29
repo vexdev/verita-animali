@@ -13,9 +13,10 @@
  */
 
 get_header(); ?>
-
+<div id="center">
+  <?php get_sidebar(); ?>
 		<section id="primary">
-			<div id="content" role="main">
+			<div id="contenuto" role="main">
 
 			<?php if ( have_posts() ) : ?>
 
@@ -67,6 +68,7 @@ get_header(); ?>
 
 			</div><!-- #content -->
 		</section><!-- #primary -->
+        </div>
 
-<?php get_sidebar(); ?>
+
 <?php get_footer(); ?>

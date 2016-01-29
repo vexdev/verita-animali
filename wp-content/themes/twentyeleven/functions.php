@@ -114,6 +114,7 @@ function twentyeleven_setup() {
 
 	// This theme uses Featured Images (also known as post thumbnails) for per-post/per-page Custom Header images
 	add_theme_support( 'post-thumbnails' );
+	set_post_thumbnail_size( 200, 200, false );
 
 	// Add support for custom headers.
 	$custom_header_support = array(
@@ -701,42 +702,140 @@ function twentyeleven_body_classes( $classes ) {
 }
 add_filter( 'body_class', 'twentyeleven_body_classes' );
 
-/**
- * Retrieve the IDs for images in a gallery.
- *
- * @uses get_post_galleries() First, if available. Falls back to shortcode parsing,
- *                            then as last option uses a get_posts() call.
- *
- * @since Twenty Eleven 1.6
- *
- * @return array List of image IDs from the post gallery.
- */
-function twentyeleven_get_gallery_images() {
-	$images = array();
 
-	if ( function_exists( 'get_post_galleries' ) ) {
-		$galleries = get_post_galleries( get_the_ID(), false );
-		if ( isset( $galleries[0]['ids'] ) )
-			$images = explode( ',', $galleries[0]['ids'] );
-	} else {
-		$pattern = get_shortcode_regex();
-		preg_match( "/$pattern/s", get_the_content(), $match );
-		$atts = shortcode_parse_atts( $match[3] );
-		if ( isset( $atts['ids'] ) )
-			$images = explode( ',', $atts['ids'] );
-	}
+// Shortcode (inserire quadre in apertura e chiusura)
+// da usare nella forma:
+// articoli categoria="ID-CATEGORIA" numero="NUMERO DI POST"
 
-	if ( ! $images ) {
-		$images = get_posts( array(
-			'fields'         => 'ids',
-			'numberposts'    => 999,
-			'order'          => 'ASC',
-			'orderby'        => 'menu_order',
-			'post_mime_type' => 'image',
-			'post_parent'    => get_the_ID(),
-			'post_type'      => 'attachment',
-		) );
-	}
+/*function mostra_articoli($atts){
 
-	return $images;
+	extract(shortcode_atts(array(
+		'categoria' => '',
+		'numero' => '1000',
+		
+	), $atts));
+
+	$output = "";	
+
+	$my_query = new WP_Query('cat='.$categoria.'&posts_per_page='.$numero);
+		while ($my_query->have_posts()) : $my_query->the_post();
+		$do_not_duplicate = $post->ID;
+
+		$linkurl = get_permalink($post->ID);
+		$linktitle = get_the_title($post->ID);
+		$meta = get_post_meta($post->ID, 'ora');
+
+
+		$output = $output . "<li><a href=\"" . $linkurl . "\" title=\"" . $linktitle . "\">" .$linktitle. "</a>" . $meta . "</li>"; 
+
+		endwhile;
+
+	return "<ul>" . $output . "</ul>"; 
 }
+
+add_shortcode('articoli', 'mostra_articoli');*/
+
+
+// display a list of posts with custom size thumbnails, using the post first image
+function getPostList($categ='',$postnr=20){
+	// $categ = category name - not required
+	// $postnr = number of posts you want to display - not required
+	$htmlcod .= "<div id='div_postlist'>"."\n";
+	// 
+	if (have_posts()) : 				
+		global $post;
+	    // here we check if the user has chosen a category
+	    if($categ!=''){
+	      $strquery = "numberposts=".$postnr."&category_name=". $categ;				
+	    }
+	    else{
+	      $strquery =  "numberposts=".$postnr;
+	    }
+			 
+	    // here we get the posts
+	    $myposts = get_posts($strquery);
+			 		 
+	    // if we want, we can display the number of registers found
+	    //echo sizeof($myposts);
+			 
+	    if($myposts):
+		 // here we go in the loop
+		foreach($myposts as $post) :				 	
+                    // getting the first image of the post to make the thumb
+                    $args = array(
+                        'post_type' => 'attachment',
+                        'numberposts' => -1,
+                        'post_status' => null,
+                        'post_parent' => $post->ID
+						
+                    ); 
+                    $attachments = get_posts($args);
+                    
+					
+					
+					
+                    // here we set the variable for the attachment string
+                    $imgsrc = "";
+                    if ($attachments):
+                        // here we take the first image and break the loop
+                        foreach ($attachments as $attachment) {
+                             // this brings the attachment array $imgobj = wp_get_attachment_image_src($attachment->ID);
+                             // if you use the line obove, you can call $imgobj[0] to get the image source 
+                            // you can set the thumbnail dimensions, here we use 40 x 40
+                            $imgsrc = wp_get_attachment_image($attachment->ID, array(200,200), $icon = false); 
+							
+                            break;
+							
+                        }
+                    endif;
+                    // here we start to build the return html code
+                        $htmlcod .= "<p><a href='". get_permalink()."' title='". get_the_title() ."'>";
+                        $htmlcod .= get_the_time('d/m/Y')." - ".get_the_title();
+					    
+						$htmlcod .= "</a></p>"."\n";
+						
+						
+						
+						
+						
+							
+						
+						
+                    // if the post has at least one image attached, we display it
+                    if($imgsrc!=""):
+					
+					
+						
+					
+					
+                        $htmlcod .= "<div class=\"left\">";                                	
+                        $htmlcod .= "<a href='". get_permalink() ."' title='". get_the_title() ."'>";
+                    	 $htmlcod .= "</a>";
+					
+						$htmlcod .=  $imgsrc .  get_the_excerpt();  
+						
+                        
+						$htmlcod .= "</div>";
+						
+					
+						      
+                  
+						
+						
+						
+														
+                    endif;	
+					
+											
+		endforeach;     
+	    else:
+			// here goes the message, if there is no results to display
+			$htmlcod = "<div>"."\n";
+			$htmlcod .= "<p>No registers found.</p>"."\n";								
+			$htmlcod .= "</div>"."\n";
+	    endif;			
+	endif;
+        $htmlcod .= "</div>";
+	return $htmlcod;
+}
+?>

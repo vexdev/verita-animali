@@ -1,32 +1,38 @@
-<?php
-/**
- * Template for displaying all single posts
- *
- * @package WordPress
- * @subpackage Twenty_Eleven
- * @since Twenty Eleven 1.0
- */
+<?php get_header(); ?>
+<div id="center">
+  <?php get_sidebar(); ?>
+<div id="contenuto">
+<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+  <h1><?php the_title(); ?></h1>
+  <div id="music"></div>
+  <div class="entry">
+    <?php the_content('<p>leggi il seguito... &raquo;</p>'); ?>
 
-get_header(); ?>
+<div style="font-size:18px; color:#000">
+<?php echo get_post_meta($post->ID, 'ora', true); ?></div>
+<?php //the_meta(); ?>
 
-		<div id="primary">
-			<div id="content" role="main">
 
-				<?php while ( have_posts() ) : the_post(); ?>
 
-					<nav id="nav-single">
-						<h3 class="assistive-text"><?php _e( 'Post navigation', 'twentyeleven' ); ?></h3>
-						<span class="nav-previous"><?php previous_post_link( '%link', __( '<span class="meta-nav">&larr;</span> Previous', 'twentyeleven' ) ); ?></span>
-						<span class="nav-next"><?php next_post_link( '%link', __( 'Next <span class="meta-nav">&rarr;</span>', 'twentyeleven' ) ); ?></span>
-					</nav><!-- #nav-single -->
+    <?php wp_link_pages(array('before' => '<p><strong>' . __('Pagine:', 'kubrick') . '</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
+  <?php endwhile; endif; ?>
 
-					<?php get_template_part( 'content-single', get_post_format() ); ?>
 
-					<?php comments_template( '', true ); ?>
 
-				<?php endwhile; // end of the loop. ?>
+</div>  
+</div>
+<div class="clearall"></div>
+</div>
+<div id="partners">
+<!-- Begin zooplus Partner Program Code -->
+<a href="http://www.zooplus.it/shop/partner/zap143909"><img src="http://www.zooplus.it/affiliate/material/zap143909" alt="TUTTI GLI ANIMALI" width="468" height="60" border="0"/></a>
+<!-- End zooplus Partner Program Code -->
 
-			</div><!-- #content -->
-		</div><!-- #primary -->
+<a href="http://laverabestia.org" target="_blank"><img src="http://laverabestia.org/images/banner/banneroriz.png" alt="Laverabestia.org - Animal Video Community" width="468" height="60" border="0" /></a></div>
+<div class="clearall"></div>
+
+
+
+
 
 <?php get_footer(); ?>
