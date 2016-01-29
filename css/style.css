@@ -1,0 +1,564 @@
+/*
+Questo CSS incorpora tutte le definizioni di stile.
+L'applicazione di questo CSS è successiva al reset completo dei TAG, in modo
+tale che il loro effetto sia cross-browser.
+
+
+@date		2010/01/21
+@version	3.1
+@author		Umberto Di Mauro
+*/
+
+
+
+/* --------- CONTENTS ---------------------------------------------------------
+
+1: BODY & GLOBALS SETUP
+2: PAGE STRUCTURE
+	a) ClearAll
+	b) center square
+	d) flash nella index
+	e) contenitore superiore layout in flash
+	f) contenitore e contenuto del corpo della pagina
+	g) chiusura bottom layout
+	h) riflesso layoutsotto layout
+	i) type-typografy - testi del sito
+
+
+	
+---------------------------------------------------------------------------- */
+
+/* 1: BODY & GLOBALS SETUP
+============================================================================ */
+html {
+	background: url(../grafica/fondo.jpg);
+	
+}
+
+body {
+
+	margin:15px;
+	padding:0;
+	text-align:center;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:13px;
+	
+	
+}
+
+b, strong {
+	font-weight:bold;
+	color: #000;
+}
+
+i, em {
+	font-style:italic;
+}
+
+
+
+
+
+
+
+
+/* 2: PAGE STRUCTURE
+============================================================================ */
+
+/* a) ClearAll
+---------------------------------------------------------------------------- */
+.clearall {
+	clear:both;
+	line-height:0px;
+	height:0px;
+}
+
+/* b) center square
+---------------------------------------------------------------------------- */
+
+
+#music{
+
+	}
+
+#top {
+	height:52px;
+	width:1008px;
+	margin:0 auto;
+	background: url(../grafica/fondo_top.png);
+	text-align:center;
+	font-size:14px;
+	color:#000;
+}
+#top a:link, #top a:visited{
+	font-size:16px;
+	color:#FFCC00;
+}
+
+#facebook {
+	height:52px;
+	width:210px;
+	float:right;
+	text-align:center;
+	margin-right:20px;
+}
+
+
+#testata {
+	height:211px;
+	width:1008px;
+	margin:0 auto;
+	background: url(../grafica/fondo_testata3.png);
+	text-align:center;
+	font-size:14px;
+	color:#000;
+}
+
+
+#marchio {
+	height:211px;
+	width:278px;
+	float:left;
+		padding:0;
+
+}
+#logo {
+	height:211px;
+	width:720px;
+	float:left;
+	padding:0;
+}
+
+
+
+#menu {
+	height:51px;
+	width:960px;
+	margin:0 auto;
+	background: url(../grafica/fondo_menu.png);
+	text-align:center;
+	font-size:14px;
+	line-height:14px;
+	color:#000;
+	padding-left:48px;
+
+	
+}
+
+#menu a:link, #menu a:visited  {
+	height:51px;
+	float:left;
+	font-family:Tahoma, Verdana, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	line-height:45px;
+	color:#000;
+	text-decoration:none;
+	text-align:center;
+	margin:0 28px 0 28px;
+}
+
+
+
+#menu a:hover, #menu a:active{
+	height:51px;
+	float:left;
+	font-family:Tahoma, Verdana, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	line-height:45px;
+	color:#947713;
+	text-decoration:none;
+	text-align:center;
+	margin:0 28px 0 28px;
+
+	
+}
+
+
+
+
+
+.cerca{
+		height:51px;
+		width:300px;
+		float:left;
+		font-family:Tahoma, verdana, sans-serif;
+		font-size:12px;
+		font-weight:bold;
+		line-height:45px;
+		color:#000;
+		text-decoration:none;
+/*		text-align:center;*/
+	}
+
+
+#flash {
+	height:270px;
+	width:1008px;
+	margin:0 auto;
+	background: url(../grafica/fondo_center.png);
+	padding:0;
+	
+
+	
+}
+/*--------------------------------------------------------------
+sidebar
+--------------------------------------------------------------*/
+#sidebar {
+	float:left;
+	display:inline;
+	padding:10px 5px;
+	/*background: url(../grafica/wordpress/separatore.jpg) no-repeat top right;*/
+	font-family:Tahoma, verdana, sans-serif;
+	width:220px;
+	margin-left: 10px;
+	margin-bottom: 40px;
+	text-align:left;
+	font-size:10px;
+}
+#sidebar a { 
+font-weight:700; 
+font-family:Tahoma, verdana, sans-serif; 
+font-size:10px;
+}
+
+#sidebar a:active { 
+font-weight:700; 
+font-family:Tahoma, verdana, sans-serif; 
+font-size:10px;
+}
+
+
+#sidebar ul, #sidebar ol { padding:0; }
+#sidebar li { list-style-image:none; list-style-type:none; }
+#sidebar h2 { margin:5px 0; padding:0; }
+#sidebarlnkplay { text-align:center; margin:15px auto; }
+
+/*--------------------------------------------------------------
+menù laterale (contenuto nella sidebar)
+--------------------------------------------------------------*/
+#pagenav { margin-bottom:15px; }
+/*
+ogni livello di menù è indentato di questa quantità
+
+NB: volendo è possibile personalizzare l'ammontare dell'indentazione
+per ogni sotto-livello specificando i vari valori:
+	#pagenav ul { margin-left:10px; }
+	#pagenav ul ul { margin-left:10px; }
+	#pagenav ul ul ul { margin-left:20px; }
+...
+*/
+#pagenav ul { margin-left:0px;  }
+/*
+diminuisco il font scendendo di livello
+*/
+.menu-item ul li {background: url(http://www.verita-animali.it/grafica/wordpress/h3_sidebar.png) no-repeat; list-style-type:none; margin-left:0px; font-size:12px; padding:8px 2px 10px 10px; }
+.menu-menu-container ul li { background:none; list-style-type:none; margin-left:0px; font-size:11px; border-bottom:none; }
+.menu-menu-container ul ul li {	background:none; list-style-image:url(../grafica/wordpress/miniarrow.gif); list-style-position:inside; margin-left:12px; font-size:12px; border-bottom:none; padding:0; }
+
+
+
+#pagenav li {background: url(../grafica/wordpress/h3_sidebar.png) no-repeat; list-style-type:none; margin-left:0px; font-size:12px; padding:8px 2px 10px 10px; }
+#pagenav ul li { background:none; list-style-type:none; margin-left:0px; font-size:11px; border-bottom:none; }
+#pagenav ul ul li {	background:none; list-style-image:url(../grafica/wordpress/miniarrow.gif); list-style-position:inside; margin-left:12px; font-size:12px; border-bottom:none; padding:0; }
+
+
+
+/*
+e diminuisco anche la grana del grassetto
+*/
+#pagenav li a { font-weight:700; 
+	text-align:left;
+	text-decoration:none;
+	font-size:14px;
+	color:#000;
+	/*margin-top:10px;*/
+	font-family:Tahoma, Verdana, sans-serif; font-size:12px;
+	}
+	
+	
+#pagenav li a:hover {
+	 font-weight:700; 
+	text-align:left;
+	text-decoration:none;
+	font-size:12px;
+	color:#947713;
+	/*margin-top:10px;*/
+	font-family:Tahoma, Verdana, sans-serif;
+	
+	}
+	
+	
+	
+	
+#pagenav ul li a { font-weight:400; font-family:Tahoma, Verdana, sans-serif; font-size:12px; }
+#pagenav ul ul li a { font-weight:normal; font-family:Tahoma, Verdana, sans-serif; font-size:12px; }
+/*
+indicatori della pagina correntemente selezionata
+*/
+
+/*menu*/
+#pagenav .page_item {margin-top:2px; font-family:Tahoma, Verdana, sans-serif; font-size:14px; font-weight:bold;  }
+#pagenav .page_item ul {margin-top:10px;}
+#pagenav .page_item ul li{ margin:-5px 0 -5px 0;}
+
+
+
+/*sottocategorie*/
+#pagenav .current_page_item {list-style-position:inside; font-family:Tahoma, Verdana, sans-serif; font-size:14px; font-weight:bold; }
+/*link sottocategorie*/
+#pagenav .current_page_item  a:link {list-style-position:inside; font-family:Tahoma, Verdana, sans-serif; font-size:12px; font-weight:bold; }
+/*macrocategorie*/
+#pagenav .current_page_parent {padding-top:5px; font-size:14px; font-weight:bold; }
+
+
+
+
+/*--------------------------------------------------------------
+sidebar
+--------------------------------------------------------------
+#sidebar{
+	margin:15px 10px 0 10px;
+	float:left;
+	width:278px;
+	text-align:left;
+	min-height:500px;
+	
+}
+
+#topsidebar{
+	width:278px;
+	height:74px;
+	text-align:center;
+	background:url(../grafica/sidebar_top.png);
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size: 18px;
+	font-weight:bold;
+	line-height:55px;
+	font-style:normal;
+	color:#000;
+	
+		}
+#centersidebar{
+	width:278px;
+	text-align:left;
+	background:url(../grafica/sidebar_center.png) repeat-y top left;
+
+	
+}		
+#footersidebar{
+	width:278px;
+	height:29px;
+	text-align:center;
+	background:url(../grafica/sidebar_footer.png);
+	padding-top:0;
+	margin-top:0;
+
+		}
+
+
+/*---------------------------
+
+centro del sito
+---------------------------*/
+
+#center {
+	min-height:850px;
+	width:1008px;
+	margin:0 auto;
+	background: url(../grafica/fondo_center.png) repeat-y;
+	font-size:14px;
+	color:#0a5588;
+
+}
+
+
+#contenuto {
+	background:url(../grafica/zampe.png) top right no-repeat;
+	min-height:850px;
+	width:730px;
+	margin:0 auto;
+	text-align:left;
+	font-size:14px;
+	line-height:19px;
+	font-family:Tahoma, Verdana, sans-serif;
+	color:#000;
+	float:left;
+	margin-bottom:15px;
+}
+  
+#contenuto img{
+	
+border:#d0cb70 3px solid;
+	border-radius: 10px;
+  -moz-border-radius: 10px; /* firefox */
+  -webkit-border-radius: 10px; /* safari, chrome */
+}
+
+
+
+
+
+#contenuto h1 {
+	
+	text-align:center;
+	font-size:28px;
+	color:#947713;
+	margin:15px 0 45px 0;
+}
+
+#contenuto h2 {
+
+	text-align:center;
+	font-size:24px;
+	color:#000000;
+}
+
+
+#contenuto h3 a:link, #contenuto h3 a:visited{
+	font-family:Tahoma, Verdana, sans-serif;
+	padding:5px 5px;
+	text-align:left;
+	font-size:16px;
+	color:#000;
+	font-weight:bold;
+	text-decoration:none;
+	line-height:15px;
+
+}
+
+
+#contenuto h3 a:hover, #contenuto h3 a:active{
+	
+	font-family:Tahoma, Verdana, sans-serif;
+	padding:5px 5px;
+	text-align:left;
+	font-size:16px;
+	color:#947713;
+	font-weight:bold;
+	text-decoration:none;
+	line-height:15px;
+	
+	
+	
+
+	
+}
+
+#contenuto h4 {
+
+	padding:0px 5px;
+	text-align:left;
+	font-size:18px;
+	color:#0a5588;
+	line-height:15px;
+
+}
+
+
+#contenuto a:link,  #contenuto a:visited {
+	
+	text-align:right;
+	text-decoration:underline;
+	font-size:14px;
+	color:#947713;
+}
+
+
+#contenuto table.appuntamenti {
+	font-family:Tahoma, Verdana, sans-serif;
+	text-align:left;
+	font-size:12px;
+	color:#000;
+	text-decoration:none;
+
+}
+
+#contenuto table tr td{
+	padding-bottom:25px;
+
+}
+
+
+#partners {
+	height:70px;
+	width:1008px;
+	margin:0 auto;
+	background: url(../grafica/fondo_partners.png) repeat-y;
+}
+
+#footer {
+	height:65px;
+	width:1008px;
+	margin:0 auto;
+	background: url(../grafica/fondo_footer2.png);
+	
+	
+}
+
+#credits {
+	width:880px;
+	height:45px;
+	margin:0 auto;
+	padding:5px 15px;
+	line-height:45px;
+	text-align:right;
+	font-size:11px;
+	color:#000;
+}
+
+
+#credits a:link,  #credits a:visited {
+	
+	text-align:right;
+	text-decoration:underline;
+	font-size:11px;
+	color:#000;
+}
+
+
+#map {
+	float:left;
+	width:500px;
+	height:300px;
+}
+.image {border:#d0cb70 3px solid;}
+.imagesx {float: left; margin:15px; border:#d0cb70 3px solid;}
+.imagedx {float: right;  margin:15px; border:#d0cb70 3px solid;}
+.aligncenter { text-align:center; margin:0 auto; border:#d0cb70 3px solid;}
+
+ 
+
+#message{
+	font-family:georgia, Verdana, Arial, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+  	color: #ff0000;
+	/*min-height:420px;*/
+}
+
+.error {
+    color: #ff0000;
+}
+
+div.left{
+	
+	width:710px;
+	height:180px;
+	
+ 
+	}
+	
+	
+	div.left img{
+		float:left;
+		margin-right:20px;
+	
+ 
+	}
+
+
+	
+	
